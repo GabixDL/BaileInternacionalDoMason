@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Baile do Mason - Deep navy theme */
+
+@layer base {
+  :root {
+    /* Deep navy base - #06065D */
+    --background: 240 90% 19%; /* #06065D */
+    --foreground: 220 20% 95%;
+
+    --card: 240 70% 15%;
+    --card-foreground: 220 20% 95%;
+
+    --popover: 240 70% 15%;
+    --popover-foreground: 220 20% 95%;
+
+    /* Gold primary */
+    --primary: 43 85% 60%;
+    --primary-foreground: 240 90% 10%;
+
+    /* Muted navy secondary */
+    --secondary: 240 50% 25%;
+    --secondary-foreground: 220 20% 90%;
+
+    /* Muted tones */
+    --muted: 240 40% 22%;
+    --muted-foreground: 220 15% 65%;
+
+    /* Bright gold accent */
+    --accent: 43 90% 55%;
+    --accent-foreground: 240 90% 10%;
+
+    /* Status colors */
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 220 20% 98%;
+
+    /* Seat status colors */
+    --seat-available: 145 40% 50%;
+    --seat-available-foreground: 145 40% 95%;
+    --seat-selected: 43 85% 55%;
+    --seat-selected-foreground: 43 85% 10%;
+    --seat-reserved: 0 40% 50%;
+    --seat-reserved-foreground: 220 20% 95%;
+
+    /* Borders and inputs */
+    --border: 240 40% 28%;
+    --input: 240 40% 28%;
+    --ring: 43 85% 60%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 240 80% 12%;
+    --sidebar-foreground: 220 20% 90%;
+    --sidebar-primary: 43 85% 60%;
+    --sidebar-primary-foreground: 240 90% 10%;
+    --sidebar-accent: 240 50% 25%;
+    --sidebar-accent-foreground: 220 20% 90%;
+    --sidebar-border: 240 40% 25%;
+    --sidebar-ring: 43 85% 60%;
+
+    /* Floor/table background */
+    --floor: 240 60% 14%;
+    --table-surface: 240 40% 25%;
+    --table-border: 240 30% 35%;
+
+    /* Hero gradient */
+    --hero-bg: 240 90% 19%;
+    --hero-glow: 43 85% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .floor-pattern {
+    background-image: 
+      radial-gradient(circle at 1px 1px, hsl(var(--border)) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+}
+
+/* Hero section styles */
+.hero-gradient {
+  background: radial-gradient(ellipse at center top, hsl(240 70% 25% / 0.8) 0%, hsl(240 90% 19%) 70%);
+}
+
+.scroll-indicator {
+  animation: bounce-down 2s ease-in-out infinite;
+}
+
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+.logo-float {
+  animation: logo-pulse 5s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.03); filter: brightness(1.08); }
+}
+
+.gold-glow {
+  text-shadow: 0 0 40px hsl(43 85% 60% / 0.3);
+}
+
+/* Scroll-driven hero shrink */
+.hero-logo-wrapper {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+}
+.hero-logo-wrapper.scrolled {
+  transform: scale(0.6) translateY(-30px);
+  opacity: 0.3;
+}
+
+.hero-content {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+.hero-content.scrolled {
+  transform: translateY(-40px);
+  opacity: 0;
+}
+
+/* Masonic compass SVG animation */
+.compass-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: draw-line 2s ease-out forwards;
+}
+@keyframes draw-line {
+  to { stroke-dashoffset: 0; }
+}
+
+.compass-rotate {
+  animation: compass-spin 20s linear infinite;
+  transform-origin: center;
+}
+@keyframes compass-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* CTA reveal on scroll */
+.cta-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cta-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glow ring around logo */
+.logo-glow-ring {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 1px solid hsl(43 85% 60% / 0.15);
+  animation: glow-ring 4s ease-in-out infinite;
+}
+@keyframes glow-ring {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.08); opacity: 0.6; }
+}
+
+.logo-glow-ring-2 {
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  border: 1px solid hsl(43 85% 60% / 0.08);
+  animation: glow-ring 4s ease-in-out infinite 1s;
+}
